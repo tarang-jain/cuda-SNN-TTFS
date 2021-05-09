@@ -48,7 +48,7 @@ void thresholding(const vector<vector<double>>& V, vector<vector<int>>& x, vecto
             {
                 x[i][t] = 1;
                 firing_t[i] = t;
-                cout<<t<<"\n";
+                //cout<<t<<"\n";
                 break;
             }
         }
@@ -63,6 +63,7 @@ void dense(const vector<vector<vector<int>>>& x_in, vector<vector<vector<int>>>&
     x_out = vector<vector<vector<int>>>(batch_size, vector<vector<int>>(Nout, vector<int>(tmax, 0)));
     firing_t = vector<vector<int>>(batch_size, vector<int>(Nout, tmax)); //tmax : means no spike
 
+    
     for (int b = 0; b < batch_size; ++b)
     {
         vector<vector<double>> volt(Nout, vector<double>(tmax, 0));

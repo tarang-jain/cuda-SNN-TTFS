@@ -50,7 +50,7 @@ void rand_shuffle(vector<vector<double>>& x_train, vector<int>& y_train){
 }
 //Time-to-first Spike Coding : TTFS coding
 void batch_spike_encoding(const vector<vector<double>>& x_train, const vector<int>& y_train, 
-                          vector<vector<vector<int>>>& x_batch, vector<int>& y_batch,
+                          vector<vector<vector<int>>>& x_batch, vector<int>& y_batch, vector<vector<int>>& firing_t0,
                           int b, int batch_size, int n_inp){
 
     //vector<vector<double>> x_used = x_train(x_train.begin() + (b*batch_size), x_train.begin() + ((b+1)*batch_size) + 1);
@@ -59,12 +59,14 @@ void batch_spike_encoding(const vector<vector<double>>& x_train, const vector<in
 
     
     x_batch = vector<vector<vector<int>>>(batch_size, vector<vector<int>>(n_inp, vector<int>(tmax, 0)));
+    firing_t0 = vector<vector<int>>(batch_size, vector<int>(n_inp, 0));
     
     for (int i = b*batch_size, k = 0; i < (b+1)*batch_size; ++i, ++k)
     {
         for (int j = 0; j < x_train[0].size(); ++j)
         {
             int t_spike = Imax - x_train[i][j];
+            firing_t0[k][j] = t_spike;
             x_batch[k][j][t_spike] = 1;
             //cout<<t_spike<<"\n";
         }
