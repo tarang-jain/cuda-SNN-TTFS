@@ -26,7 +26,7 @@ void batch_spike_encoding(const vector<vector<double>>& x_train, const vector<in
     {
         for (int j = 0; j < x_train[0].size(); ++j)
         {
-            int t_spike = Imax - x_train[i][j];
+            int t_spike = (Imax+1) - x_train[i][j];
             x_batch[k*x_train[0].size()*tmax + j*tmax + t_spike] = 1;
         }
     }
