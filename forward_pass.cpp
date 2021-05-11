@@ -21,7 +21,6 @@ void tensordot(const vector<vector<int>>& x, const vector<vector<double>>& w, ve
             }
             V[i][t] = val;
 
-            if(V[i][t]] != 0 && index == 0)printf("%d\t%d\t%f\n", row, col, V[i][t]);
         }
     }
 
@@ -52,7 +51,6 @@ void thresholding(const vector<vector<double>>& V, vector<vector<int>>& x, vecto
             {
                 x[i][t] = 1;
                 firing_t[i] = t;
-                //cout<<t<<"\n";
                 break;
             }
         }
@@ -71,7 +69,6 @@ void dense(const vector<vector<vector<int>>>& x_in, vector<vector<vector<int>>>&
     for (int b = 0; b < batch_size; ++b)
     {
         vector<vector<double>> volt(Nout, vector<double>(tmax, 0));
-        //vector<vector<int>> x_sample(Nout, vector<int>(tmax, 0));
         tensordot(x_in[b], w, volt);
         cumsum(volt);
         thresholding(volt, x_out[b], firing_t[b]);
