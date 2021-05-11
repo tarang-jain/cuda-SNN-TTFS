@@ -65,7 +65,7 @@ void batch_spike_encoding(const vector<vector<double>>& x_train, const vector<in
     {
         for (int j = 0; j < x_train[0].size(); ++j)
         {
-            int t_spike = Imax - x_train[i][j];
+            int t_spike = (Imax+1) - x_train[i][j];
             firing_t0[k][j] = t_spike;
             x_batch[k][j][t_spike] = 1;
             //cout<<t_spike<<"\n";
@@ -85,7 +85,7 @@ void batch_spike_encoding_1D(const vector<vector<double>>& x_train, const vector
     {
         for (int j = 0; j < x_train[0].size(); ++j)
         {
-            int t_spike = Imax - x_train[i][j];
+            int t_spike = (Imax+1) - x_train[i][j];
             firing_t[k*x_train[0].size() + j] = t_spike;
             x_batch[k*x_train[0].size()*tmax + j*tmax + t_spike] = 1;
         }
