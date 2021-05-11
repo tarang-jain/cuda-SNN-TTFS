@@ -20,8 +20,12 @@ void tensordot(const vector<vector<int>>& x, const vector<vector<double>>& w, ve
                 val += x[j][t]*w[j][i];
             }
             V[i][t] = val;
+
+            if(V[i][t]] != 0 && index == 0)printf("%d\t%d\t%f\n", row, col, V[i][t]);
         }
     }
+
+    
 
 }
 

@@ -77,3 +77,18 @@ void batch_spike_encoding(const vector<vector<double>>& x_train, const vector<in
     for(int i=b*batch_size; i< (b+1)*batch_size; ++i) y_batch.push_back(y_train[i]);
     //if(b==0) cout<<y_batch.size()<<"\n";
 }
+
+void batch_spike_encoding_1D(const vector<vector<double>>& x_train, const vector<int>& y_train, int * x_batch, vector<int>& y_batch, int * firing_t, int b, int batch_size, int n_inp){
+    
+    // cout<<x_train[0].size()<<tmax;
+    for (int i = b*batch_size, k = 0; i < (b+1)*batch_size; ++i, ++k)
+    {
+        for (int j = 0; j < x_train[0].size(); ++j)
+        {
+            int t_spike = Imax - x_train[i][j];
+            firing_t[k*x_train[0].size() + j] = t_spike;
+            x_batch[k*x_train[0].size()*tmax + j*tmax + t_spike] = 1;
+        }
+    }
+    for(int i=b*batch_size; i< (b+1)*batch_size; ++i) y_batch.push_back(y_train[i]);
+}

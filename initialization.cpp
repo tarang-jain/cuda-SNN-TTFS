@@ -17,3 +17,17 @@ void weight_init(vector<vector<double>>& w1, vector<vector<double>>& w2){
         }
     }
 }
+
+void weight_init_1D(float * w1, float * w2, int n1, int n2){
+    random_device seed;
+    mt19937 generator(seed());
+    uniform_real_distribution<float> uni(0,1);
+    for (int i = 0; i < n1; ++i)
+    {
+        w1[i] = (b1-a1)*uni(generator);
+    }
+    for (int i = 0; i < n2; ++i)
+    {
+        w2[i] = (b2-a2)*uni(generator);
+    }
+}
