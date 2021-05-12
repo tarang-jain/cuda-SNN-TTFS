@@ -5,7 +5,7 @@
 //int n_layers = 2;
 const int img_size   = 28*28;
 const int n_inp      = 28*28;
-const int n_hid      = 1000;
+const int n_hid      = 400;
 const int n_out      = 10;
 const int n_epochs   = 40;
 const int batch_size = 100;

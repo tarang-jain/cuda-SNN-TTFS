@@ -5,7 +5,7 @@
 //int n_layers = 2;
 const int img_size   = 28*28;
 const int n_inp      = 28*28;
-const int n_hid      = 1000;
+const int n_hid      = 400;
 const int n_out      = 10;
 const int n_epochs   = 40;
 const int batch_size = 100;
@@ -21,6 +21,7 @@ const double a1 = 0, b1 = 5, a2 = 0, b2 = 50;
 #include "encoding.cpp"
 #include "initialization.cpp"
 #include "forward_pass.cpp"
+#include "backward_pass.cpp"
 
 //typedef long double LD;
 
