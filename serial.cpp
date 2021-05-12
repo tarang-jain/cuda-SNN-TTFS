@@ -7,20 +7,21 @@ const int img_size   = 28*28;
 const int n_inp      = 28*28;
 const int n_hid      = 1000;
 const int n_out      = 10;
-const int n_epochs   = 1;
+const int n_epochs   = 40;
 const int batch_size = 100;
 const int n_batches  = n_train/batch_size;
 const int th_val     = 100;
 const int gamma_     = 3;
-const int lr1        = 0.01;
-const int lr2        = 0.01;
-const int a1 = 0, b1 = 5, a2 = 0, b2 = 50;
+const double lr1     = 0.2;
+const double lr2     = 0.2;
+const double lambda_ = 0.000001;
+const double a1 = 0, b1 = 5, a2 = 0, b2 = 50;
 
 #include "mnist_load.cpp"
 #include "encoding.cpp"
 #include "initialization.cpp"
 #include "forward_pass.cpp"
-#include "backward_pass.cpp"
+
 //typedef long double LD;
 
 int main(){
@@ -69,7 +70,7 @@ int main(){
 			dense(x1_out , x2_out, w2, firing_t2, batch_size);
 
 			train_acc += loss_calc(firing_t2, y_batch, delta2, batch_size, n_out);
-			cout<<"\t\ttrain acc = "<<train_acc<<"/60000 = "<<(train_acc/60000.0)<<"\n";
+			cout<<"\t\ttrain acc = "<<train_acc<<"/"<<((b+1)*batch_size)<<" = "<<(train_acc/(1.0*(b+1)*batch_size))<<"\n";
 
 			backprop_dense(firing_t2, firing_t1, delta2, delta1, w2, dw2, lr2, true);
 			update_weights(w2, dw2, lr2);

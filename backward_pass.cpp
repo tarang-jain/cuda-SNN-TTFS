@@ -1,4 +1,3 @@
-
 void batch_sub(const vector<vector<int>>& target, const vector<vector<int>>& firing_t, vector<vector<double>>& delta){
     int b_size = firing_t.size();
     int N = firing_t[0].size();
@@ -9,7 +8,7 @@ void batch_sub(const vector<vector<int>>& target, const vector<vector<int>>& fir
     {
         for (int i = 0; i < N; ++i)
         {
-            delta[b][i] = target[b][i] - firing_t[b][i];
+            delta[b][i] = (target[b][i] - firing_t[b][i])/tmax;
         }
     }
 }
@@ -40,7 +39,7 @@ int loss_calc(const vector<vector<int>>& firing_t, const vector<int>& y_batch,ve
         }
         else
         {
-            target[b] = firing_t[b];
+            //target[b] = firing_t[b];
             for (int i = 0; i < n_out; ++i)
             {
                 if(firing_t[b][i] - min_time < gamma_)
@@ -170,7 +169,7 @@ void update_weights(vector<vector<double>>& w, const vector<vector<double>>& dw,
     {
         for (int j = 0; j < Nout; ++j)
         {
-            w[i][j] += lr*dw[i][j];
+            w[i][j] += lr*( dw[i][j] + (lambda_*w[i][j]) );
         }
     }
 }

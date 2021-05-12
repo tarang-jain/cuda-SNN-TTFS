@@ -20,11 +20,8 @@ void tensordot(const vector<vector<int>>& x, const vector<vector<double>>& w, ve
                 val += x[j][t]*w[j][i];
             }
             V[i][t] = val;
-
         }
     }
-
-    
 
 }
 
@@ -51,6 +48,7 @@ void thresholding(const vector<vector<double>>& V, vector<vector<int>>& x, vecto
             {
                 x[i][t] = 1;
                 firing_t[i] = t;
+                //cout<<t<<"\n";
                 break;
             }
         }
@@ -62,13 +60,14 @@ void dense(const vector<vector<vector<int>>>& x_in, vector<vector<vector<int>>>&
            vector<vector<int>>& firing_t, int batch_size){
     int Nin  = w.size();
     int Nout = w[0].size();
-    x_out = vector<vector<vector<int>>>(batch_size, vector<vector<int>>(Nout, vector<int>(tmax, 0)));
+    x_out = vector<vector<vector<int>>>(batch_size, vector<vector<int>>(Nout, vector<int>(tmax+1, 0)));
     firing_t = vector<vector<int>>(batch_size, vector<int>(Nout, tmax)); //tmax : means no spike
 
-    
+
     for (int b = 0; b < batch_size; ++b)
     {
         vector<vector<double>> volt(Nout, vector<double>(tmax, 0));
+        //vector<vector<int>> x_sample(Nout, vector<int>(tmax, 0));
         tensordot(x_in[b], w, volt);
         cumsum(volt);
         thresholding(volt, x_out[b], firing_t[b]);
@@ -77,3 +76,4 @@ void dense(const vector<vector<vector<int>>>& x_in, vector<vector<vector<int>>>&
     //batch_cumsum();
     //batch_thresholding();
 }
+
